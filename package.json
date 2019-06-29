@@ -1,0 +1,27 @@
+{
+  "name": "ghostify",
+  "version": "0.0.1",
+  "description": "Exports a Tumblr blog to Ghost.",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jmooserific/ghostify.git"
+  },
+  "main": "index.js",
+  "bin": {
+    "outside": "bin/ghostify"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tumblr",
+    "ghost",
+    "export",
+    "import"
+  ],
+  "author": "John Moose",
+  "license": "MIT",
+  "dependencies": {
+    "minimist": "^1.2.0"
+  }
+}
