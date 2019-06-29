@@ -1,3 +1,9 @@
+"use strict";
+
 module.exports = () => {
-  console.log('Prepare to be Ghostified!')
-}
+  require('yargs').usage('Usage: $0 <command> [options]')
+    .commandDir('cmds')
+    .demandCommand()
+    .help()
+    .argv;
+};

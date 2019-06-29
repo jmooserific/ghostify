@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "bin": {
-    "outside": "bin/ghostify"
+    "ghostify": "bin/ghostify"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,9 @@
   "author": "John Moose",
   "license": "MIT",
   "dependencies": {
-    "minimist": "^1.2.0"
+    "yargs": "^13.2.4"
+  },
+  "devDependencies": {
+    "jshint": "^2.10.2"
   }
 }
