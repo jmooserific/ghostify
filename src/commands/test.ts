@@ -1,5 +1,5 @@
 import {Command, flags} from '@oclif/command'
-import * as tumblr from 'tumblr.js'
+import fetch from 'node-fetch'
 
 export default class Test extends Command {
   static description = 'Test connectivity with the specified Tumblr blog, without actually exporting anything.'
@@ -26,25 +26,17 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
     const tumblrConsumerKey = flags.tumblrConsumerKey
     const blogIdentifier = args.blogIdentifier
 
-    const tumblrClient = this.creatTumblrClient(tumblrConsumerKey)
-
-    tumblrClient.blogInfo(blogIdentifier, (err, data) => {
-      if (!err) {
-        this.log(`Connected to Tumblr and found the blog "${data.blog.title}" with ${data.blog.total_posts} posts.`)
-      } else {
-        this.log(err.message)
-        process.exit(1)
-      }
-    })
+    const blog = await this.getBlogInfo(tumblrConsumerKey, blogIdentifier)
+    this.log(`Connected to Tumblr and found the blog "${blog.title}" with ${blog.posts} posts.`)
   }
 
-  // Connect to Tumbr and retrieve details about the specified blog
-  creatTumblrClient(tumblrConsumerKey: string) {
-    return tumblr.createClient({
-      credentials: {
-        consumer_key: tumblrConsumerKey,
-      },
-      returnPromises: true
-    })
+  async getBlogInfo(tumblrConsumerKey: string, blogIdentifier: string) {
+    const url = `https://api.tumblr.com/v2/blog/${blogIdentifier}/info?api_key=${tumblrConsumerKey}`
+    const response = await fetch(url)
+    if (!response.ok) {
+      this.error(response.statusText)
+    }
+    const json = await response.json()
+    return json.response.blog
   }
 }

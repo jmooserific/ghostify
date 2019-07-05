@@ -6,23 +6,23 @@ const test = Test.test
 const expect = Test.expect
 
 describe('test', () => {
-  // const params = {
-  //   blogIdentifier: 'my_awesome_blog',
-  //   title: 'My Awesome Blog',
-  //   posts: 123,
-  //   apiKey: 'abc123'
-  // }
-  // // valid call
-  // test
-  //   .nock('https://api.tumblr.com', api => {
-  //     api.get(`/v2/blog/${params.blogIdentifier}/info?api_key=${params.apiKey}`)
-  //       .reply(200, {meta: {status: 200, mag: 'OK'}, response: {blog: {title: params.title, posts: params.posts}}})
-  //   })
-  //   .stdout()
-  //   .command(['test', '--tumblrConsumerKey', params.apiKey, params.blogIdentifier])
-  //   .it('returns details about the specified blog', ctx => {
-  //     expect(ctx.stdout).to.equal('Connected to Tumblr and found the blog "My Awesome Blog" with 123 posts.\n')
-  //   })
+  const params = {
+    blogIdentifier: 'my_awesome_blog',
+    title: 'My Awesome Blog',
+    posts: 123,
+    apiKey: 'abc123'
+  }
+  // valid call
+  test
+    .stdout()
+    .nock('https://api.tumblr.com', api => {
+      api.get(`/v2/blog/${params.blogIdentifier}/info?api_key=${params.apiKey}`)
+        .reply(200, {meta: {status: 200, mag: 'OK'}, response: {blog: {title: params.title, posts: params.posts}}})
+    })
+    .command(['test', '--tumblrConsumerKey', params.apiKey, params.blogIdentifier])
+    .it('returns details about the specified blog', ctx => {
+      expect(ctx.stdout).to.equal('Connected to Tumblr and found the blog "My Awesome Blog" with 123 posts.\n')
+    })
 
   // help command
   test
