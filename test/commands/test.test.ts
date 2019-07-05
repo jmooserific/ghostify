@@ -17,7 +17,7 @@ describe('test', () => {
     .stdout()
     .nock('https://api.tumblr.com', api => {
       api.get(`/v2/blog/${params.blogIdentifier}/info?api_key=${params.apiKey}`)
-        .reply(200, {meta: {status: 200, mag: 'OK'}, response: {blog: {title: params.title, posts: params.posts}}})
+        .reply(200, {meta: {status: 200, msg: 'OK'}, response: {blog: {title: params.title, posts: params.posts}}})
     })
     .command(['test', '--tumblrConsumerKey', params.apiKey, params.blogIdentifier])
     .it('returns details about the specified blog', ctx => {
@@ -33,6 +33,7 @@ describe('test', () => {
       expect(ctx.stdout).to.contain('Test connectivity with the specified Tumblr blog, without actually exporting anything.')
     })
 
+  // no blog identifier specified
   test
     .command(['test'])
     .catch(e => {
@@ -40,10 +41,24 @@ describe('test', () => {
     })
     .it('errors when not specifying a blog identifier')
 
+  // no API key specified
   test
     .command(['test', 'my_awesome_blog'])
     .catch(e => {
       expect(e.message).to.contain('Missing required flag:\n -k, --tumblrConsumerKey TUMBLRCONSUMERKEY')
     })
     .it('errors when not specifying an API key')
+
+  // error when calling Tumblr API
+  test
+    .stdout()
+    .nock('https://api.tumblr.com', api => {
+      api.get(`/v2/blog/${params.blogIdentifier}/info?api_key=${params.apiKey}`)
+        .reply(401, {meta: {status: 401, msg: 'Unauthorized'}, response: [], errors: [{title: 'Unauthorized', code: 0, detail: 'Minor hiccup. Try again.'}]})
+    })
+    .command(['test', '--tumblrConsumerKey', params.apiKey, params.blogIdentifier])
+    .catch(e => {
+      expect(e.message).to.contain('Unauthorized')
+    })
+    .it('errors when not authorized')
 })
