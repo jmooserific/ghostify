@@ -16,7 +16,7 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
   }
 
   static args = [
-    {name: 'blogName', required: true}
+    {name: 'blogIdentifier', required: true}
   ]
 
   // Execute this command
@@ -24,11 +24,11 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
     const {args, flags} = this.parse(Test)
 
     const tumblrConsumerKey = flags.tumblrConsumerKey
-    const blogName = args.blogName
+    const blogIdentifier = args.blogIdentifier
 
     const tumblrClient = this.creatTumblrClient(tumblrConsumerKey)
 
-    tumblrClient.blogInfo(blogName, (err, data) => {
+    tumblrClient.blogInfo(blogIdentifier, (err, data) => {
       if (!err) {
         this.log(`Connected to Tumblr and found the blog "${data.blog.title}" with ${data.blog.total_posts} posts.`)
       } else {
