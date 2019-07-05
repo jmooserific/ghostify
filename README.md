@@ -31,28 +31,8 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`ghostify hello [FILE]`](#ghostify-hello-file)
 * [`ghostify help [COMMAND]`](#ghostify-help-command)
-
-## `ghostify hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ ghostify hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ ghostify hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/jmooserific/ghostify/blob/v0.0.1/src/commands/hello.ts)_
+* [`ghostify test BLOGNAME`](#ghostify-test-blogname)
 
 ## `ghostify help [COMMAND]`
 
@@ -70,4 +50,23 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.0/src/commands/help.ts)_
+
+## `ghostify test BLOGNAME`
+
+Test connectivity with the specified Tumblr blog, without actually exporting anything.
+
+```
+USAGE
+  $ ghostify test BLOGNAME
+
+OPTIONS
+  -h, --help                                 show CLI help
+  -k, --tumblrConsumerKey=tumblrConsumerKey  (required) Tumblr API consumer key
+
+EXAMPLE
+  $ ghostify test --tumblrConsumerKey AbCdE12345 my_awesome_blog
+  Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
+```
+
+_See code: [src/commands/test.ts](https://github.com/jmooserific/ghostify/blob/v0.0.1/src/commands/test.ts)_
 <!-- commandsstop -->
