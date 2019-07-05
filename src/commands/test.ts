@@ -19,27 +19,32 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
     {name: 'blogName', required: true}
   ]
 
+  // Execute this command
   async run() {
     const {args, flags} = this.parse(Test)
 
     const tumblrConsumerKey = flags.tumblrConsumerKey
     const blogName = args.blogName
 
-    const client = tumblr.createClient({
-      credentials: {
-        consumer_key: tumblrConsumerKey,
-      },
-      returnPromises: true
-    })
+    const tumblrClient = this.creatTumblrClient(tumblrConsumerKey)
 
-    client.blogInfo(blogName, (err, data) => {
+    tumblrClient.blogInfo(blogName, (err, data) => {
       if (!err) {
         this.log(`Connected to Tumblr and found the blog "${data.blog.title}" with ${data.blog.total_posts} posts.`)
-        return data
       } else {
         this.log(err.message)
         process.exit(1)
       }
+    })
+  }
+
+  // Connect to Tumbr and retrieve details about the specified blog
+  creatTumblrClient(tumblrConsumerKey: string) {
+    return tumblr.createClient({
+      credentials: {
+        consumer_key: tumblrConsumerKey,
+      },
+      returnPromises: true
     })
   }
 }
