@@ -7,12 +7,12 @@ export default class Test extends Command {
   static examples = [
     `$ ghostify test --tumblrConsumerKey AbCdE12345 my_awesome_blog
 Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
-`,
+`
   ]
 
   static flags = {
     help: flags.help({char: 'h'}),
-    tumblrConsumerKey: flags.string({char: 'k', description: 'Tumblr API consumer key', required: true}),
+    tumblrConsumerKey: flags.string({char: 'k', description: 'Tumblr API consumer key', required: true})
   }
 
   static args = [
