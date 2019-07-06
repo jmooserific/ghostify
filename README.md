@@ -5,11 +5,9 @@ Export your [Tumblr](https://tumblr.com) blog to [Ghost](https://ghost.org).
 
 _Very much a work in progress._
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/ghostify.svg)](https://npmjs.org/package/ghostify)
-[![CircleCI](https://circleci.com/gh/jmooserific/ghostify/tree/master.svg?style=shield)](https://circleci.com/gh/jmooserific/ghostify/tree/master)
-[![Downloads/week](https://img.shields.io/npm/dw/ghostify.svg)](https://npmjs.org/package/ghostify)
-[![License](https://img.shields.io/npm/l/ghostify.svg)](https://github.com/jmooserific/ghostify/blob/master/package.json)
+[![CircleCI](https://circleci.com/gh/jmooserific/ghostify.svg?style=svg)](https://circleci.com/gh/jmooserific/ghostify)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ce3bd74775ca451ac327/maintainability)](https://codeclimate.com/github/jmooserific/ghostify/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ce3bd74775ca451ac327/test_coverage)](https://codeclimate.com/github/jmooserific/ghostify/test_coverage)
 
 <!-- toc -->
 * [Usage](#usage)
@@ -22,7 +20,7 @@ $ npm install -g ghostify
 $ ghostify COMMAND
 running command...
 $ ghostify (-v|--version|version)
-ghostify/0.0.1 darwin-x64 node-v12.5.0
+ghostify/0.0.1 darwin-x64 node-v12.6.0
 $ ghostify --help [COMMAND]
 USAGE
   $ ghostify COMMAND
@@ -32,7 +30,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`ghostify help [COMMAND]`](#ghostify-help-command)
-* [`ghostify test BLOGNAME`](#ghostify-test-blogname)
+* [`ghostify test BLOGIDENTIFIER`](#ghostify-test-blogidentifier)
 
 ## `ghostify help [COMMAND]`
 
@@ -51,13 +49,13 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.0/src/commands/help.ts)_
 
-## `ghostify test BLOGNAME`
+## `ghostify test BLOGIDENTIFIER`
 
 Test connectivity with the specified Tumblr blog, without actually exporting anything.
 
 ```
 USAGE
-  $ ghostify test BLOGNAME
+  $ ghostify test BLOGIDENTIFIER
 
 OPTIONS
   -h, --help                                 show CLI help
