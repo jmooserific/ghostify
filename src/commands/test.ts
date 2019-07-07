@@ -30,6 +30,8 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
     this.log(`Connected to Tumblr and found the blog "${blog.title}" with ${blog.posts} posts.`)
   }
 
+  // Make a call to the Tumblr blog info API endpoint and return the "blog" object
+  // https://www.tumblr.com/docs/en/api/v2#info---retrieve-blog-info
   async getBlogInfo(tumblrConsumerKey: string, blogIdentifier: string) {
     const url = `https://api.tumblr.com/v2/blog/${blogIdentifier}/info?api_key=${tumblrConsumerKey}`
     const response = await fetch(url)
