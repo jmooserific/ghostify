@@ -7,8 +7,6 @@
     "rules": {
       "array-type": false,
       "await-promise": false,
-      "block-spacing": [true, "always"],
-      "brace-style": [true, "1tbs", {"allowSingleLine": true}],
       "comment-format": false,
       "curly": false,
       "default-case": false,
@@ -50,7 +48,6 @@
       "restrict-plus-operands": false,
       "semicolon": [true, "never"],
       "switch-default": false,
-      "ter-indent": [true, 2, { "MemberExpression": 1 }],
       "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
       "type-literal-delimiter": false,
       "underscore-consistent-invocation": false,
