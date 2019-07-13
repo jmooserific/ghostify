@@ -9,20 +9,40 @@ describe('export', () => {
   const params = {
     blogIdentifier: 'my_awesome_blog',
     title: 'My Awesome Blog',
-    posts: 123,
     apiKey: 'abc123'
   }
+
+  const responseWithNoNextLink = {
+    meta: {status: 200, msg: 'OK'},
+    response: {
+      blog: {
+        title: params.title
+      },
+      posts: [
+        {
+          type: 'text',
+          id: 1234567890,
+          timestamp: 1562881471,
+          summary: 'A summary',
+          title: '',
+          slug: 'im-a-blog-post',
+          body: '<p>I\'m a blog post!</p>'
+        }
+      ]
+    }
+  }
+
   // valid call
-  // test
-  //   .stdout()
-  //   .nock('https://api.tumblr.com', api => {
-  //     api.get(`/v2/blog/${params.blogIdentifier}/posts?npf=False&api_key=${params.apiKey}`)
-  //       .reply(200, {meta: {status: 200, msg: 'OK'}, response: {blog: {title: params.title, posts: params.posts}}})
-  //   })
-  //   .command(['test', '--tumblrConsumerKey', params.apiKey, params.blogIdentifier])
-  //   .it('returns details about the specified blog', ctx => {
-  //     expect(ctx.stdout).to.equal('Connected to Tumblr and found the blog "My Awesome Blog" with 123 posts.\n')
-  //   })
+  test
+    .stdout()
+    .nock('https://api.tumblr.com', api => {
+      api.get(`/v2/blog/${params.blogIdentifier}/posts?npf=False&api_key=${params.apiKey}`)
+        .reply(200, responseWithNoNextLink)
+    })
+    .command(['export', '--tumblrConsumerKey', params.apiKey, params.blogIdentifier])
+    .it('exports the posts from the specified blog', ctx => {
+      expect(ctx.stdout).to.contain('Transforming /v2/blog/my_awesome_blog/posts')
+    })
 
   // help command
   test
