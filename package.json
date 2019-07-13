@@ -1,7 +1,7 @@
 {
   "name": "ghostify",
   "description": "Export a Tumblr blog to Ghost.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "John Moose @jmooserific",
   "bin": {
     "ghostify": "./bin/run"
