@@ -20,7 +20,7 @@ $ npm install -g ghostify
 $ ghostify COMMAND
 running command...
 $ ghostify (-v|--version|version)
-ghostify/0.0.1 darwin-x64 node-v12.6.0
+ghostify/0.0.2 darwin-x64 node-v12.6.0
 $ ghostify --help [COMMAND]
 USAGE
   $ ghostify COMMAND
@@ -29,8 +29,29 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`ghostify export BLOGIDENTIFIER`](#ghostify-export-blogidentifier)
 * [`ghostify help [COMMAND]`](#ghostify-help-command)
 * [`ghostify test BLOGIDENTIFIER`](#ghostify-test-blogidentifier)
+
+## `ghostify export BLOGIDENTIFIER`
+
+Exports the specified Tumblr blog in the Ghost JSON format.
+
+```
+USAGE
+  $ ghostify export BLOGIDENTIFIER
+
+OPTIONS
+  -h, --help                                 show CLI help
+  -k, --tumblrConsumerKey=tumblrConsumerKey  (required) Tumblr API consumer key
+  -o, --outputFile=outputFile                [default: ghost_import.json] Output file name
+
+EXAMPLE
+  $ ghostify export --tumblrConsumerKey AbCdE12345 --outputFile ghost_import.json my_awesome_blog
+  Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
+```
+
+_See code: [src/commands/export.ts](https://github.com/jmooserific/ghostify/blob/v0.0.2/src/commands/export.ts)_
 
 ## `ghostify help [COMMAND]`
 
@@ -66,5 +87,5 @@ EXAMPLE
   Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
 ```
 
-_See code: [src/commands/test.ts](https://github.com/jmooserific/ghostify/blob/v0.0.1/src/commands/test.ts)_
+_See code: [src/commands/test.ts](https://github.com/jmooserific/ghostify/blob/v0.0.2/src/commands/test.ts)_
 <!-- commandsstop -->
