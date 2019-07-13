@@ -6,7 +6,7 @@ export default class Export extends Command {
   static description = 'Exports the specified Tumblr blog in the Ghost JSON format.'
 
   static examples = [
-    `$ ghostify export --tumblrConsumerKey AbCdE12345 --outputFile export.json my_awesome_blog
+    `$ ghostify export --tumblrConsumerKey AbCdE12345 --outputFile ghost_import.json my_awesome_blog
 Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
 `
   ]
@@ -14,7 +14,7 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
   static flags = {
     help: flags.help({char: 'h'}),
     tumblrConsumerKey: flags.string({char: 'k', description: 'Tumblr API consumer key', required: true}),
-    outputFile: flags.string({char: 'o', description: 'Output file name', default: 'ghost.json'})
+    outputFile: flags.string({char: 'o', description: 'Output file name', default: 'ghost_import.json'})
   }
 
   static args = [
@@ -52,7 +52,7 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
   // Iterate over all of the posts in the specified blog, transfrming them into Ghost format
   async transformAllPosts(tumblrConsumerKey: string, blogIdentifier: string) {
     const baseUrl = 'https://api.tumblr.com'
-    let nextPage = `/v2/blog/${blogIdentifier}/posts?&npf=False`
+    let nextPage = `/v2/blog/${blogIdentifier}/posts?npf=False`
     const apiKeyParam = `&api_key=${tumblrConsumerKey}`
 
     let title = null
