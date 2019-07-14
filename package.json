@@ -1,15 +1,15 @@
 {
   "name": "ghostify",
   "description": "Export a Tumblr blog to Ghost.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "John Moose @jmooserific",
   "bin": {
     "ghostify": "./bin/run"
   },
   "bugs": "https://github.com/jmooserific/ghostify/issues",
   "dependencies": {
-    "@oclif/command": "^1.5.15",
-    "@oclif/config": "^1.13.0",
+    "@oclif/command": "^1.5.16",
+    "@oclif/config": "^1.13.2",
     "@oclif/plugin-help": "^2.2.0",
     "@types/node-fetch": "^2.3.7",
     "node-fetch": "^2.6.0",
@@ -30,7 +30,7 @@
     "nyc": "^14.1.1",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.3"
   },
   "engines": {
     "node": ">=8.0.0"
@@ -61,7 +61,7 @@
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "tslint -p test -t stylish",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "nyc --reporter=lcov --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "test": "nyc --reporter=lcov --reporter=text --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts"
