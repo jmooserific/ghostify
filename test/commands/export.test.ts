@@ -32,7 +32,7 @@ describe('export', () => {
     }
   }
 
-  // valid call
+  // Valid call
   test
     .stdout()
     .nock('https://api.tumblr.com', api => {
@@ -44,7 +44,7 @@ describe('export', () => {
       expect(ctx.stdout).to.contain('Transforming /v2/blog/my_awesome_blog/posts')
     })
 
-  // help command
+  // Help command
   test
     .stdout()
     .command(['export', '--help'])
@@ -53,7 +53,7 @@ describe('export', () => {
       expect(ctx.stdout).to.contain('Exports the specified Tumblr blog in the Ghost JSON format.')
     })
 
-  // no blog identifier specified
+  // No blog identifier specified
   test
     .command(['export'])
     .catch(e => {
@@ -61,7 +61,7 @@ describe('export', () => {
     })
     .it('errors when not specifying a blog identifier')
 
-  // no API key specified
+  // No API key specified
   test
     .command(['export', 'my_awesome_blog'])
     .catch(e => {
@@ -69,7 +69,7 @@ describe('export', () => {
     })
     .it('errors when not specifying an API key')
 
-  // error when calling Tumblr API
+  // Error when calling Tumblr API
   test
     .stdout()
     .nock('https://api.tumblr.com', api => {

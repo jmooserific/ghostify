@@ -12,7 +12,8 @@ describe('test', () => {
     posts: 123,
     apiKey: 'abc123'
   }
-  // valid call
+
+  // Valid call
   test
     .stdout()
     .nock('https://api.tumblr.com', api => {
@@ -24,7 +25,7 @@ describe('test', () => {
       expect(ctx.stdout).to.equal('Connected to Tumblr and found the blog "My Awesome Blog" with 123 posts.\n')
     })
 
-  // help command
+  // Help command
   test
     .stdout()
     .command(['test', '--help'])
@@ -33,7 +34,7 @@ describe('test', () => {
       expect(ctx.stdout).to.contain('Test connectivity with the specified Tumblr blog, without actually exporting anything.')
     })
 
-  // no blog identifier specified
+  // No blog identifier specified
   test
     .command(['test'])
     .catch(e => {
@@ -41,7 +42,7 @@ describe('test', () => {
     })
     .it('errors when not specifying a blog identifier')
 
-  // no API key specified
+  // No API key specified
   test
     .command(['test', 'my_awesome_blog'])
     .catch(e => {
@@ -49,7 +50,7 @@ describe('test', () => {
     })
     .it('errors when not specifying an API key')
 
-  // error when calling Tumblr API
+  // Error when calling Tumblr API
   test
     .stdout()
     .nock('https://api.tumblr.com', api => {

@@ -2,6 +2,7 @@ import {Command, flags} from '@oclif/command'
 import * as fs from 'fs'
 import fetch from 'node-fetch'
 
+/** Command used to export a Tumblr blog to the Ghost JSON format */
 export default class Export extends Command {
   static description = 'Exports the specified Tumblr blog in the Ghost JSON format.'
 
@@ -23,7 +24,7 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
 
   posts: IGhostPost[] = []
 
-  // Execute this command
+  /** Execute this command */
   async run() {
     const {args, flags} = this.parse(Export)
 
@@ -49,7 +50,7 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
     })
   }
 
-  // Iterate over all of the posts in the specified blog, transfrming them into Ghost format
+  /** Iterate over all of the posts in the specified blog, transforming them into Ghost format */
   async transformAllPosts(tumblrConsumerKey: string, blogIdentifier: string) {
     const baseUrl = 'https://api.tumblr.com'
     let nextPage = `/v2/blog/${blogIdentifier}/posts?npf=False`
@@ -79,6 +80,7 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
     return {postsCount, title}
   }
 
+  /** Transform a post into the format expected by Ghost */
   transformPost(tumblrPost: ITumblrPost) {
     const mobiledoc = {
       version: '0.3.1',
@@ -99,6 +101,7 @@ Connected to Tumblr and found the blog "My Awesome Blog" with 101 posts.
   }
 }
 
+/** Interface representing a Tumblr post */
 interface ITumblrPost extends Object {
   title?: string // The optional title of the post
   body?: string // The full post body
@@ -115,12 +118,13 @@ interface ITumblrPost extends Object {
   tags: string[] // Tags applied to the post
   bookmarklet?: boolean // Indicates whether the post was created via the Tumblr bookmarklet.	Exists only if true
   mobile?: boolean // Indicates whether the post was created via mobile/email publishing	Exists only if true
-  source_url?: string //	The URL for the source of the content (for quotes, reblogs, etc.)	Exists only if there's a content source
+  source_url?: string // The URL for the source of the content (for quotes, reblogs, etc.)	Exists only if there's a content source
   source_title?: string // The title of the source site. Exists only if there's a content source.
   state: string // Indicates the current state of the post	States are published, queued, draft and private.
   total_posts: number // The total number of post available for this request, useful for paginating through results.
 }
 
+/** Interface representing a Ghost post */
 interface IGhostPost extends Object {
   title: string
   slug: string
